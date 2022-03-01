@@ -2,7 +2,7 @@
 var countDownTimer;
 var timerInterval;
 var arrayOfQuestions = [];
-var gameSCore = 0; //initializes the game score to zero 
+var gameScore = 0; //initializes the game score to zero 
 var timePenalty = 30; //thirty seconds
 const maxTime = 5 * 60; //time is in seconds
 function setCountDownTimer() {
@@ -39,8 +39,8 @@ function showScoreBoard () {
 
 function presentScore () {
     let currentScore = document.getElementById('score');
-    currentScore.innertext = gameSCore;
-    console.log("showScore: currentScore", currentScore);
+    currentScore.innertext = gameScore;
+    console.log("presentScore: currentScore", currentScore);
 }
 
 function hideGreeting() {
@@ -55,6 +55,8 @@ function doGame() {
     startTimer ();
     hideGreeting ();
     showScoreBoard ();
+    presentScore ();
+    getQuestion ('quest0');
 }
 
 //question is asked
@@ -87,18 +89,73 @@ function SetupQuestionsAndAnswers() {
 
 }
 
-function nextQuestion() {
-        for(let i = 0; i<arrayOfQuestions.length; i++) {
+function getQuestion(questionId) {
+    console.log('getQuestion questionId', questionId);
 
+    let found = false;
+    
+    for(let i = 0; i<arrayOfQuestions.length; i++) {
+        if(questionId == arrayOfQuestions[i].id) {
+            prepareQuestionandAnswers(i); 
+        }
     }
 }
 
-function showQuestion(questionindex) {
-    let questionSection = document.getElementId('question');
+function prepareQuestionandAnswers(questionIndex) {
+    console.log('prepareQuestionAndAnswers questionIndex', questionIndex);
+    let questionSection = document.getElementId('questions');
     let newQuestion= document.createElement('div');
-    newQuestion.id = arrayOfQuestions[questionindex].id
-    newQuestion.innerText = arrayOfQuestions[questionindex].question;
-    questionSection.appendChild(newQuestion);
+    newQuestion.id = arrayOfQuestions[questionIndex].id
+    newQuestion.innerText = arrayOfQuestions[questionIndex].question;
+    newQuestion.classList.add('question');
+    newQuestion.appendChild(newQuestion);
+
+    let qSpan = document.createElement('span');
+    qSpan.innertext = arrayOfQuestions[questionIndex].question;
+    newQuestion.appendChild(qSpan);
+
+
+    if(arrayOfQuestions [questionIndex].answer1) {
+        let answer = document.createElement('div');
+        let rdoBtn = document.createElement('input');
+        let label = document.createElement('label');
+
+        rdoBtn.id = `${arrayOfQuestions[questionIndex].id}_answer1`;
+        rdoBtn.setAttribute('type', 'radio');
+        rdoBtn.value = 1
+        rdoBtn.classList.add('answer');
+        rdoBtn.classList.add('answer') = arrayOfQuestions[questionIndex].id;
+        rdoBtn.name = arrayOfQuestions[questionIndex].id;
+
+        label.innertext = arrayOfQuestions[questionIndex].answer1;
+        label.setAttribute('for', `${rdoBtn.id}`);
+
+        answer.classList.add('answer');
+        answer.appendChild(rdoBtn);
+        answer.appendChild(label);
+        newQuestion.appendChild('answer');
+
+        console.log('prepareQuestionAndAnswers answer', answer);
+
+
+        answer.innertext = arrayOfQuestions[questionIndex].answer1;
+        answer.classList.add('answer');
+        answer.id = "" + arrayOfQuestions[questionIndex].id + "_answer1";
+        //answer.id = `${arrayOfQuestions[questionIndex].id}_answer1`;
+        newQuestion.appendChild(answer);
+    }
+
+    if(arrayOfQuestions [questionIndex].answer2) {
+        let answer = document.createElement('div');
+        answer.innertext = arrayOfQuestions[questionIndex].answer1;
+        answer.classList.add('answer');
+        answer.id = `${arrayOfQuestions[questionIndex].id}_answer2`;
+        newQuestion.appendChild(answer);
+
+    }
+
+
+
 }
 
 //if answered correctly, show points and go to next question
