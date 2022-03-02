@@ -1,15 +1,15 @@
 .welcome {
     border: 1px solid black;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    flex-direction: column;
-    padding: 50px;
+    height: 250px;
+    width: 50%;
     margin: auto;
     text-align: center;
     box-sizing: content-box;
-    position: relative;
+    position: absolute;
 }
 
-.main center {
+.center {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,7 +20,7 @@ p {
 }
 
 #btnBegin {
-    padding: 20px 30px
+    padding: 20px 30px;
 }
 
 .hide {
