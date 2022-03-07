@@ -501,8 +501,6 @@ function showHighScores() {
     ? JSON.parse(localStorage.getItem(highScoreKey))
     : [];
 
-    //remove this line when you have updated the code.
-    alert('Update the code to show the high scores in a table');
 
     let i=0;
     while(i<hScores.length ) {

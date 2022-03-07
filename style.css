@@ -7,6 +7,9 @@ body,
         display: flex;
         margin: 0;
         flex-direction: row;
+        background-color: rgb(227, 189, 245);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: large;
     }
 
     .left {
